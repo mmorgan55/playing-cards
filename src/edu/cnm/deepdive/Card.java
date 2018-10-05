@@ -32,13 +32,13 @@ public class Card {
 
   public static void main(String[] args) {
     List<Card> deck = new LinkedList<>();
-    List<Card> redCards = new LinkedList<>();
-    List<Card> blackCards = new LinkedList<>();
+    List<Card> redCards = new LinkedList<Card>();
+    List<Card> blackCards = new LinkedList<Card>();
     List<Card> discard = new LinkedList<>();
-    List<Card> inter1 = new LinkedList<>();
-    List<Card> inter2 = new LinkedList<>();
+    List<Card> redInter = new LinkedList<>();
+    List<Card> blackInter = new LinkedList<>();
 
-    Random rng;
+    Random rng = new Random();
 
     for (Suit suit : Suit.values()) {
       for (Rank rank : Rank.values()) {
@@ -65,6 +65,40 @@ public class Card {
       }
     }
 
-    
+    int lowerCardAmt;
+
+    if (redCards.size() > blackCards.size()) {
+      lowerCardAmt = blackCards.size();
+    } else if (blackCards.size() > redCards.size()){
+      lowerCardAmt = redCards.size();
+    } else {
+      lowerCardAmt = 13;
+    }
+
+    int randInt = (((int)Math.floor(Math.random() * lowerCardAmt)));
+
+    for (int i = 0; i < randInt; i++) {
+      redInter.add(((LinkedList<Card>) redCards).removeLast());
+      blackInter.add(((LinkedList<Card>) blackCards).removeLast());
+    }
+
+    blackCards.addAll(redInter);
+    redCards.addAll(blackInter);
+
+    int redTotal = 0;
+    int blackTotal = 0;
+
+    for (Card card : redCards) {
+      if (card.getSuit().getColor() == Color.RED) {
+        redTotal++;
+      }
+    }
+
+    for (Card card : blackCards) {
+      if (card.getSuit().getColor() == Color.BLACK) {
+        blackTotal++;
+      }
+    }
+    System.out.println(redTotal == blackTotal);
   }
 }
