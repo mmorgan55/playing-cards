@@ -6,16 +6,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MindBoggling {
-  ArrayList<Card> gameDeck = new ArrayList<>();
-  LinkedList<Card> redCards = new  LinkedList<>();
-  LinkedList<Card> blackCards = new  LinkedList<>();
-  List<Card> discard = new ArrayList<>();
-  Color color = null;
-  Deck deck;
+  private ArrayList<Card> gameDeck;
+  private LinkedList<Card> redCards = new  LinkedList<>();
+  private LinkedList<Card> blackCards = new  LinkedList<>();
+  private List<Card> discard = new ArrayList<>();
+  private Color color = null;
+
 
 
   public MindBoggling () {
-    deck = new Deck();
+    Deck deck = new Deck();
     gameDeck = deck.getDeck();
   }
 
@@ -65,6 +65,7 @@ public class MindBoggling {
     redCards.addAll(blackInter);
   }
 
+  //TODO put print statement for more interesting play.
   private boolean checkMagic () {
     int redTotal = 0;
     int blackTotal = 0;
@@ -80,7 +81,7 @@ public class MindBoggling {
         blackTotal++;
       }
     }
-    
+
     return (redTotal == blackTotal);
   }
 }
